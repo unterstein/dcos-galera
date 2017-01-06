@@ -1,0 +1,51 @@
+{  
+  "id":"galera",
+  "cpus":2,
+  "mem":2000,
+  "instances":3,
+  "disk": 2000,
+  "container":{
+    "type":"DOCKER",
+    "volumes":[  
+      {  
+        "containerPath":"data",
+        "mode":"RW",
+        "persistent":{  
+          "type":"root",
+          "size":2000
+        }
+      },
+      {  
+        "containerPath":"/var/lib/mysql",
+        "hostPath":"data",
+        "mode":"RW"
+      }
+    ],
+    "docker":{  
+      "image":"unterstein/dcos-galera:latest",
+      "network":"USER",
+      "forcePullImage":true
+    }
+  },
+  "env":{  
+    "MYSQL_ROOT_PASSWORD":"galera"
+  },
+  "ipAddress":{
+    "networkName":"dcos"
+  },
+  "healthChecks":[
+    {
+      "protocol":"TCP",
+      "port":3306,
+      "gracePeriodSeconds":300,
+      "intervalSeconds":60,
+      "timeoutSeconds":20,
+      "maxConsecutiveFailures":3,
+      "ignoreHttp1xx":false
+    }
+  ],
+  "residency": {
+    "relaunchEscalationTimeoutSeconds": 3600,
+    "taskLostBehavior": "WAIT_FOREVER"
+  }
+}
