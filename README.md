@@ -46,4 +46,4 @@ This implementation based on the [official docker-mariadb image](https://github.
 The MariaDB Galera Cluster is running inside an overlay network, where each container will receive an own IP address and exposes all ports within this overlay network. This overlay network and the resulting IP addresses are only available within the DC/OS cluster
 
 ### Adaptions
-The main part of the adaptions to run the official docker-mariadb image on top of DC/OS are related to service discovery, see the [https://github.com/unterstein/dcos-galera/blob/master/image/dcos-galera.sh](entrypoint of the mariadb cluster image).
+The main part of the adaptions to run the official docker-mariadb image on top of DC/OS are related to service discovery, see the [entrypoint of the mariadb cluster image](https://github.com/unterstein/dcos-galera/blob/master/image/dcos-galera.sh).
