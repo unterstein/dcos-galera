@@ -10,7 +10,6 @@ MariaDB Galera Cluster is a synchronous multi-master cluster for MariaDB. It is 
 
 Starting with MariaDB 10.1, the wsrep API for Galera Cluster is included by default.
 
-### More information about MariaDB and Galera Cluster
 Please visit the [MariaDB Galera Cluster documentation](https://mariadb.com/kb/en/mariadb/what-is-mariadb-galera-cluster/) to get more information about the cluster features.
 
 ## Install MariaDB Galera Cluster on your DC/OS cluster
@@ -23,6 +22,10 @@ dcos marathon app add marathon-galera.json
 If you do not want to use the CLI, just copy the content of `marathon-galera.json` to the DC/OS UI in the service section.
 
 ## Marathon configuration
+You are dealing with only one marathon application definition. Therefore the first node listed as A-Record in DC/OS DNS will initialize a new cluster and all the other nodes will wait a few seconds and join the newly created cluster.
+
+## Scaling
+Just go to DC/OS UI in the service section and scale your nodes to the needed amount. The newly started MariaDB containers will automatically join the cluster.
 
 ## Persistence
 Note: You are using local persistent volumes. The big advantage of using local persistent volume vs ephemeral volumes or remote volumes is:
@@ -35,7 +38,7 @@ Note: You are using local persistent volumes. The big advantage of using local p
 
 ## Docker images
 ### Base image
-This implementation based on the [official docker-mariadb image](https://github.com/docker-library/mariadb/tree/master/10.1) and has only few adaptions to add service discovery within the DC/OS cluster using DNS.
+This implementation based on the [official docker-mariadb image](https://github.com/docker-library/mariadb/tree/master/10.1.20) from [docker hub](https://hub.docker.com/r/library/mariadb/tags/) and has only few adaptions to add service discovery within the DC/OS cluster using DNS and the decision making which of the initial nodes is the initializing node.
 
 ### Networking
 The MariaDB Galera Cluster is running inside an overlay network, where each container will receive an own IP address and exposes all ports within this overlay network. This overlay network and the resulting IP addresses are only available within the DC/OS cluster
