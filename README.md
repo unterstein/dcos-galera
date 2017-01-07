@@ -24,7 +24,7 @@ dcos marathon app add marathon-galera.json
 If you do not want to use the CLI, just copy the content of `marathon-galera.json` to the DC/OS UI in the service section.
 
 ## Marathon configuration
-You are dealing with only one marathon application definition. Therefore the first node listed as A-Record in DC/OS DNS will initialize a new cluster and all the other nodes will wait a few seconds and join the newly created cluster.
+You are dealing with only one marathon application definition. Therefore the first node listed as A-Record in DC/OS DNS will initialize a new cluster and all the other nodes will wait a few seconds and join the newly created cluster. The idea how to bundle the containers together is from [here](https://www.digitalocean.com/community/tutorials/how-to-configure-a-galera-cluster-with-mariadb-10-1-on-ubuntu-16-04-servers)
 
 ## Scaling
 Just go to DC/OS UI in the service section and scale your nodes to the needed amount. The newly started MariaDB containers will automatically join the cluster.
@@ -43,7 +43,7 @@ Note: You are using local persistent volumes. The big advantage of using local p
 This implementation based on the [official docker-mariadb image](https://github.com/docker-library/mariadb/tree/master/10.1.20) from [docker hub](https://hub.docker.com/r/library/mariadb/tags/) and has only few adaptions to add service discovery within the DC/OS cluster using DNS and the decision making which of the initial nodes is the initializing node.
 
 ### Networking
-The MariaDB Galera Cluster is running inside an overlay network, where each container will receive an own IP address and exposes all ports within this overlay network. This overlay network and the resulting IP addresses are only available within the DC/OS cluster
+The MariaDB Galera Cluster is running inside an overlay network, where each container will receive an own IP address and exposes all ports within this overlay network. This overlay network and the resulting IP addresses are only available within the DC/OS cluster. [More about DC/OS networking](https://docs.mesosphere.com/1.8/usage/service-discovery/dns-overview/)
 
 ### Adaptions
 The main part of the adaptions to run the official docker-mariadb image on top of DC/OS are related to service discovery, see the [entrypoint of the mariadb cluster image](https://github.com/unterstein/dcos-galera/blob/master/image/dcos-galera.sh).
