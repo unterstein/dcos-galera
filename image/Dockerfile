@@ -1,4 +1,4 @@
-FROM mariadb:10
+FROM mariadb:10.1.20
 
 RUN apt-get update && \ 
 	apt-get install -y dnsutils net-tools && \

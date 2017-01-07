@@ -2,4 +2,9 @@
 
 cd $(dirname $0)
 
-docker build --tag unterstein/dcos-galera:latest .
+version="latest"
+if [ -n "$1" ]; then
+	version=$1
+fi
+
+docker build --tag unterstein/dcos-galera:$version .

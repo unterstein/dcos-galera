@@ -1,6 +1,8 @@
 # Running MariaDB Galera cluster on top of DC/OS
 
 ## Overview
+**Current Version:** 10.1.20
+
 ### About DC/OS
 We will run Galera Cluster on top of DC/OS, the datacenter operating system, which is a production proven platform to run microservices, as well as your traditional databases, big data and fast data applications.
 DC/OS is build on top of Apache Mesos, which Twitter uses for example to run their production on or Apple uses to run Siri. Mesos abstracts that you are dealing a cluster and make it feel like you would interact with a single computer.

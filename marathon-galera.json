@@ -22,7 +22,7 @@
       }
     ],
     "docker":{  
-      "image":"unterstein/dcos-galera:latest",
+      "image":"unterstein/dcos-galera:10.1.20",
       "network":"USER",
       "forcePullImage":true
     }

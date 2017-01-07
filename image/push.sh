@@ -2,4 +2,9 @@
 
 cd $(dirname $0)
 
-docker push unterstein/dcos-galera:latest
+version="latest"
+if [ -n "$1" ]; then
+	version=$1
+fi
+
+docker push unterstein/dcos-galera:$version
